@@ -129,38 +129,6 @@ resource "null_resource" "file_execute" {
     
 }
 
-
-#---- RDS host login ----
-/*
-resource "null_resource" "rds_login" {
-  triggers = {
-    rds_endpoint = aws_db_instance.rds-demo.endpoint
-  }
-
-
-  provisioner "local-exec" {
-    command = "chmod +x ${path.module}/connect_to_rds.sh && ${path.module}/connect_to_rds.sh '${aws_db_instance.rds-demo.endpoint}' '/tmp/obbs.sql'"
-  }
-
-
-  provisioner "remote-exec" {
-    inline = [
-      "#!/bin/bash",
-      "chmod +x /tmp/connect_to_rds.sh",
-      "sh. /tmp/connect_to_rds.sh",
-    ]
-
-    connection {
-    type        = "ssh"
-    host        = aws_instance.webserver.public_ip
-    user        = "ec2-user"
-    private_key = file("~/.ssh/id_rsa")
-}
-  }
-}
-
-*/
-
 resource "null_resource" "rds_login" {
   triggers = {
     rds_endpoint = aws_db_instance.rds-demo.endpoint
